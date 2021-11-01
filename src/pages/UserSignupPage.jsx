@@ -2,12 +2,18 @@ import React, { Component } from 'react'
 
 export class UserSignupPage extends Component {
         
-        state = {
-            displayName : ' ' ,
-            username : ' ',
-            password: ' ',
-            repeatPassword: ' '
-        }
+  constructor(props){
+      super(props);
+      this.props = props;
+    this.state = {
+        displayName : ' ' ,
+        username : ' ',
+        password: ' ',
+        repeatPassword: ' '
+    };
+  }
+
+  props = {};
      
 
     onChangeDisplayName = (event) =>{
@@ -37,13 +43,23 @@ export class UserSignupPage extends Component {
         });  
     }
 
+    onClickSignUp(){
+        const user = {
+            username : this.state.username,
+            displayName : this.state.displayName,
+            password : this.state.password
+        }
+        if(this.props.actions){
+            this.props.actions.postSignup(user);
+        }
+    }
+
     render() {
         return (
             <div>
                 <h1>Sign Up</h1>
                 <div>
-                    <input 
-                    placeholder="Your display name" 
+                    <input placeholder="Your display name" 
                     value={this.state.displayName}
                        onChange={this.onChangeDisplayName} 
                     />
@@ -64,7 +80,7 @@ export class UserSignupPage extends Component {
                      value={this.state.repeatPassword} onChange={this.onChangeRepeatPassword}/>
                 </div>
                 <div>
-                    <button>Sign Up</button>
+                    <button onClick={this.onClickSignUp}>Sign Up</button>
                 </div>
             </div>
         )
