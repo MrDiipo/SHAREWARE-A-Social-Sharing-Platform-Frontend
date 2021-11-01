@@ -9,7 +9,8 @@ export class UserSignupPage extends Component {
         displayName : undefined,
         username : undefined,
         password: undefined,
-        repeatPassword: undefined
+        repeatPassword: undefined,
+        pendingApiCall : false
     };
   }
      
@@ -46,8 +47,17 @@ export class UserSignupPage extends Component {
             username : this.state.username,
             displayName : this.state.displayName,
             password : this.state.password
-        }
-            this.props.actions.postSignup(user);
+        };
+            this.setState({
+                pendingApiCall : true
+            });
+            this.props.actions.postSignup(user).then((response) => {
+                this.setState({pendingApiCall : false});
+            }).catch((error) => {
+                this.setState({
+                    pendingApiCall : false
+                })
+            });
     }
 
     render() {
@@ -62,29 +72,38 @@ export class UserSignupPage extends Component {
                        onChange={this.onChangeDisplayName} 
                     />
                 </div>
-                <div>
+                <div className="col-12 mb-3">
                 <label>Username</label>
                     <input className="form-control"
                      placeholder="Your username"
-                        value={this.state.username}
+                        value= {this.state.username}
                         onChange={this.onChangeUsername}
                     />
                 </div>
-                <div>
+                <div className="col-12 mb-3">
                 <label>Password</label>
                     <input className="form-control"
                   placeholder="Your password" type="password"
                         value={this.state.password} onChange={this.onChangePassword}
                     />
                 </div>
-                <div>
+                <div className="col-12 mb-3">
                 <label>Password Repeat</label>
                     <input className="form-control"
                     placeholder="Repeat your password" type="password"
                      value={this.state.repeatPassword} onChange={this.onChangeRepeatPassword}/>
                 </div>
                 <div className="text-center">
-                    <button className="btn btn-primary" onClick={this.onClickSignUp}>Sign Up</button>
+                    <button
+                     className="btn btn-primary" 
+                     onClick={this.onClickSignUp}
+                     disabled={this.state.pendingApiCall}>
+                     {this.state.pendingApiCall && (<div className="spinner-border text-light spinner-border-sm ml-10">
+                     <span className="sr-only"></span>
+                     </div>) 
+                     }
+                      Sign Up
+                     </button>
                 </div>
             </div>
         )
