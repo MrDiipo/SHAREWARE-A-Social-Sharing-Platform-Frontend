@@ -6,14 +6,12 @@ export class UserSignupPage extends Component {
       super(props);
       this.props = props;
     this.state = {
-        displayName : ' ' ,
-        username : ' ',
-        password: ' ',
-        repeatPassword: ' '
+        displayName : undefined,
+        username : undefined,
+        password: undefined,
+        repeatPassword: undefined
     };
   }
-
-  props = {};
      
 
     onChangeDisplayName = (event) =>{
@@ -43,47 +41,61 @@ export class UserSignupPage extends Component {
         });  
     }
 
-    onClickSignUp(){
+    onClickSignUp = () => {
         const user = {
             username : this.state.username,
             displayName : this.state.displayName,
             password : this.state.password
         }
-        if(this.props.actions){
             this.props.actions.postSignup(user);
-        }
     }
 
     render() {
         return (
-            <div>
-                <h1>Sign Up</h1>
-                <div>
-                    <input placeholder="Your display name" 
+            <div className="container">
+                <h1 className="text-center">Sign Up</h1>
+                <div className="col-12 mb-3">
+                <label>Display Name</label>
+                    <input className="form-control"
+                    placeholder="Your display name" 
                     value={this.state.displayName}
                        onChange={this.onChangeDisplayName} 
                     />
                 </div>
                 <div>
-                    <input placeholder="Your username"
+                <label>Username</label>
+                    <input className="form-control"
+                     placeholder="Your username"
                         value={this.state.username}
                         onChange={this.onChangeUsername}
                     />
                 </div>
                 <div>
-                    <input placeholder="Your password" type="password"
+                <label>Password</label>
+                    <input className="form-control"
+                  placeholder="Your password" type="password"
                         value={this.state.password} onChange={this.onChangePassword}
                     />
                 </div>
                 <div>
-                    <input placeholder="Repeat your password" type="password"
+                <label>Password Repeat</label>
+                    <input className="form-control"
+                    placeholder="Repeat your password" type="password"
                      value={this.state.repeatPassword} onChange={this.onChangeRepeatPassword}/>
                 </div>
-                <div>
-                    <button onClick={this.onClickSignUp}>Sign Up</button>
+                <div className="text-center">
+                    <button className="btn btn-primary" onClick={this.onClickSignUp}>Sign Up</button>
                 </div>
             </div>
         )
+    }
+}
+
+UserSignupPage.defaultProps = {
+    actions : {
+        postSignup : () => new Promise((resolve, reject) =>{
+            resolve({});
+        })
     }
 }
 

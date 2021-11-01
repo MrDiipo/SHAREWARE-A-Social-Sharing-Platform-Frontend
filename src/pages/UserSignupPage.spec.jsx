@@ -148,8 +148,8 @@ describe('UserSignupPage', () =>{
                 username: 'my-user-name ',
                 displayName: 'my-display-name',
                 password: 'P4ssword' 
-            }
-            expect(actions.postSignup).toHaveBeenNthCalledWith(expectedUserObject);
+            };
+            expect(actions.postSignup).toHaveBeenCalledWith(expectedUserObject);
         })
     })
 
