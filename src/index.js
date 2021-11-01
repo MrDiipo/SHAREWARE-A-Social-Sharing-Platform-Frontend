@@ -4,9 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {UserSignupPage} from './pages/UserSignupPage';
+import * as apiCalls from './api/apiCalls';
+
+const actions = {
+  postSignup : apiCalls.signup
+}
 
 ReactDOM.render(
-    <UserSignupPage />,
+    <UserSignupPage actions={actions}/>,
   document.getElementById('root')
 );
 
