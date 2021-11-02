@@ -10,7 +10,8 @@ export class UserSignupPage extends Component {
         username : undefined,
         password: undefined,
         repeatPassword: undefined,
-        pendingApiCall : false
+        pendingApiCall : false,
+        errors : {}
     };
   }
      
@@ -53,15 +54,20 @@ export class UserSignupPage extends Component {
             });
             this.props.actions.postSignup(user).then((response) => {
                 this.setState({pendingApiCall : false});
-            }).catch((error) => {
+            }).catch((apiError) => {
+                let errors = {...this.state.errors}
+                if(apiError.response.data && apiError.response.data.validationErrors){
+                    errors = {...apiError.response.data.validationErrors}
+                }
                 this.setState({
-                    pendingApiCall : false
+                    pendingApiCall : false,
+                    errors
                 })
             });
     }
 
     render() {
-        return (
+        return ( 
             <div className="container">
                 <h1 className="text-center">Sign Up</h1>
                 <div className="col-12 mb-3">
@@ -71,6 +77,9 @@ export class UserSignupPage extends Component {
                     value={this.state.displayName}
                        onChange={this.onChangeDisplayName} 
                     />
+                    <div className="invalid-feedback">
+                        {this.state.errors.displayName}
+                    </div>
                 </div>
                 <div className="col-12 mb-3">
                 <label>Username</label>
