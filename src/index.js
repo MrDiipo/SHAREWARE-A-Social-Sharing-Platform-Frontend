@@ -10,6 +10,7 @@ const actions = {
   postSignup : apiCalls.signup
 }
 
+
 ReactDOM.render(
     <UserSignupPage actions={actions}/>,
   document.getElementById('root')

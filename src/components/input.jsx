@@ -1,8 +1,9 @@
 import React from 'react'
 
-const input = (props) => {
+const Input = (props) => {
 
     let inputClassName = 'form-control';
+
     if(props.hasError !== undefined){
         inputClassName += props.hasError ? ' is-invalid' : ' is-valid';
     }
@@ -10,20 +11,22 @@ const input = (props) => {
     return (
         <div>
         {props.label && <label>{props.label}</label>}
-           <input type={props.type || 'text'}
+           <input 
+           className={inputClassName}
+           type={props.type || 'text'}
             placeholder= {props.placeholder}
                 value = {props.value}
                 onChange = {props.onChange}
             />
-            {props.hasError && <span className="invalid-feedback">
-                {props.error}
-            </span>}
+            {props.hasError && (
+                <span className="invalid-feedback">{props.error}</span>
+                )}
         </div>
     );
-}
+};
 
-input.defaultProps = {
+Input.defaultProps = {
     onChange : () => {}
 }
 
-export default input
+export default Input;
