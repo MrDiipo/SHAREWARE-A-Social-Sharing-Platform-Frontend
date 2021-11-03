@@ -20,15 +20,19 @@ export class UserSignupPage extends Component {
 
     onChangeDisplayName = (event) =>{
         const value = event.target.value;
+        const errors = {...this.state.errors}
+        delete errors.displayName
         this.setState({
-            displayName : value
+            displayName : value, errors
         });
     }
 
     onChangeUsername = (event) =>{
         const value = event.target.value;
+        const errors = {...this.state.errors}
+        delete errors.username
         this.setState({
-            username : value
+            username : value, errors
         });
     }
 
@@ -36,19 +40,26 @@ export class UserSignupPage extends Component {
 
         const value = event.target.value;
         const repeatConfirmed = this.state.repeatPassword === value;
+        const errors = {...this.state.errors};
+        delete errors.password
+        errors.repeatPassword = repeatConfirmed ? '' : 'Does not match to password'
 
         this.setState({
             password : value,
-             passwordRepeatConfirmed : repeatConfirmed
+             passwordRepeatConfirmed : repeatConfirmed,
+             errors
         });  
     }
     onChangeRepeatPassword = (event) =>{
         const value = event.target.value;
         const repeatConfirmed = this.state.password === value;
+        const errors = {...this.state.errors};
+        errors.repeatPassword = repeatConfirmed ? '' : 'Does not match to password'
 
         this.setState({
             repeatPassword : value, 
-            passwordRepeatConfirmed : repeatConfirmed
+            passwordRepeatConfirmed : repeatConfirmed,
+            errors
         });  
     }
 

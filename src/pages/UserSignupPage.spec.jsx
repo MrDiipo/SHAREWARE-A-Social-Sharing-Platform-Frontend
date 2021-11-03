@@ -225,5 +225,7 @@ describe('UserSignupPage', () =>{
             expect(spinner).not.toBeInTheDocument();
         
         })
+
+       
     })
 })
