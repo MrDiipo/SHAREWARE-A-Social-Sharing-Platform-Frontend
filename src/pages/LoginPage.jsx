@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import ButtonWithProgess from '../components/ButtonWithProgess';
 import Input from '../components/Input'
 
 export class LoginPage extends Component {
@@ -8,7 +9,8 @@ export class LoginPage extends Component {
         this.state = {
                 username : undefined,
                 password: undefined,
-                apiError : 'Login Faled'
+                apiError : undefined,
+                pendingApiCall : undefined, 
         }
     }
 
@@ -33,12 +35,15 @@ export class LoginPage extends Component {
             username : this.state.username,
             password : this.state.password
         }
-        this.props.actions.postLogin(body)
-        .catch(
+        this.setState({pendingApiCall : true});
+        this.props.actions.postLogin(body).then(response => {
+            this.setState({pendingApiCall : false})
+        }).catch(
             error => {
                 if(error.response){
                     this.setState({
-                        apiError : error.response.data.message
+                        apiError : error.response.data.message,
+                        pendingApiCall : false,
                     })
                 }
             }
@@ -84,14 +89,13 @@ export class LoginPage extends Component {
                 }
 
                     <div className="text-center">
-                        <button
-                            disabled={disableSubmit}
-                            className="btn btn-primary"
-                            onClick={this.onClickLogin} >
-                                Login
-                        </button>
+                        <ButtonWithProgess
+                            onClick={this.onClickLogin}
+                            disabled={disableSubmit || this.state.pendingApiCall}
+                            text="Login"
+                            pendingApiCall={this.state.pendingApiCall}
+                        />
                      </div>
-            
             </div>
         )
     }

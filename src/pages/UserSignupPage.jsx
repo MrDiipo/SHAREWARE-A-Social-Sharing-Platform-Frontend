@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Input from '../components/Input';
 import "./userSignUp.css"
+import ButtonWithProgess from '../components/ButtonWithProgess';
 
 export class UserSignupPage extends Component {
         
@@ -136,16 +137,12 @@ export class UserSignupPage extends Component {
                       />
                 </div>
                 <div className="text-center">
-                    <button
-                     className="btn btn-primary" 
-                     onClick={this.onClickSignUp}
-                     disabled={this.state.pendingApiCall || !this.state.passwordRepeatConfirmed}>
-                     {this.state.pendingApiCall && (<div className="spinner-border text-light spinner-border-sm ml-10">
-                     <span className="sr-only"></span>
-                     </div>) 
-                     }
-                      Sign Up
-                     </button>
+                    <ButtonWithProgess
+                        onClick={this.onClickSignUp}
+                        disabled={this.state.pendingApiCall || !this.state.passwordRepeatConfirmed}
+                        pendingApiCall={this.state.pendingApiCall}
+                        text="Sign Up"
+                    />
                 </div>
             </div>
         )

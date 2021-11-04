@@ -8,12 +8,13 @@ import * as apiCalls from './api/apiCalls';
 import LoginPage from './pages/LoginPage';
 
 const actions = {
-  postSignup : apiCalls.signup
+  // postSignup : apiCalls.signup,
+  postLogin : apiCalls.login
 }
 
 
 ReactDOM.render(
-    <LoginPage/>,
+    <LoginPage actions={actions}/>,
   document.getElementById('root')
 );
 
