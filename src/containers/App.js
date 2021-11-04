@@ -10,7 +10,7 @@ import * as apiCalls from './../api/apiCalls';
 
 
 const actions = {
-  // postSignup : apiCalls.signup,
+  postSignup : apiCalls.signup,
   postLogin : apiCalls.login
 }
 
@@ -22,7 +22,7 @@ function App() {
      <Switch>
      <Route exact path="/" component={HomePage}/>
      <Route path="/login" component={(props) => <LoginPage {...props} actions={actions}/>}/>
-        <Route path="/signup" component={UserSignupPage}/>
+        <Route path="/signup" component={(props) => <UserSignupPage {...props} actions={actions}/>}/>
         <Route path="/:username" component={UserPage}/>
      </Switch>
     </div>

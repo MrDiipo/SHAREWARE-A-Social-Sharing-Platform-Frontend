@@ -74,7 +74,7 @@ export class UserSignupPage extends Component {
                 pendingApiCall : true
             });
             this.props.actions.postSignup(user).then((response) => {
-                this.setState({pendingApiCall : false});
+                this.setState({pendingApiCall : false}, this.props.history("/"));
             }).catch((apiError) => {
                 let errors = {...this.state.errors}
                 if(apiError.response.data && apiError.response.data.validationError){
