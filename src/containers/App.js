@@ -4,6 +4,16 @@ import { LoginPage } from './../pages/LoginPage';
 import React from 'react';
 import { UserSignupPage } from './../pages/UserSignupPage';
 import { UserPage } from './../pages/UserPage';
+import * as apiCalls from './../api/apiCalls';
+
+
+
+
+const actions = {
+  // postSignup : apiCalls.signup,
+  postLogin : apiCalls.login
+}
+
 
 function App() {
   return (
@@ -11,7 +21,7 @@ function App() {
       <div className="container">
      <Switch>
      <Route exact path="/" component={HomePage}/>
-     <Route path="/login" component={LoginPage}/>
+     <Route path="/login" component={(props) => <LoginPage {...props} actions={actions}/>}/>
         <Route path="/signup" component={UserSignupPage}/>
         <Route path="/:username" component={UserPage}/>
      </Switch>

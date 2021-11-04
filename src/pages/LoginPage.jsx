@@ -37,7 +37,9 @@ export class LoginPage extends Component {
         }
         this.setState({pendingApiCall : true});
         this.props.actions.postLogin(body).then(response => {
-            this.setState({pendingApiCall : false})
+            this.setState({pendingApiCall : false}, ()=>{
+                this.props.history.push("/");
+            })
         }).catch(
             error => {
                 if(error.response){
