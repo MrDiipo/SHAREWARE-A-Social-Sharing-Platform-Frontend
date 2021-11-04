@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Input from '../components/Input';
-import "./userSignUp.css"
 import ButtonWithProgess from '../components/ButtonWithProgess';
 
 export class UserSignupPage extends Component {
