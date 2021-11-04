@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {UserSignupPage} from './pages/UserSignupPage';
 import * as apiCalls from './api/apiCalls';
+import LoginPage from './pages/LoginPage';
 
 const actions = {
   postSignup : apiCalls.signup
@@ -12,7 +13,7 @@ const actions = {
 
 
 ReactDOM.render(
-    <UserSignupPage actions={actions}/>,
+    <LoginPage/>,
   document.getElementById('root')
 );
 
