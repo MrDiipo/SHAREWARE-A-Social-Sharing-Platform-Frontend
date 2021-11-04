@@ -5,7 +5,7 @@ export default function ButtonWithProgess(props) {
         <button
          className="btn btn-primary" 
          onClick={props.onClick}
-         disabled={props.pendingApiCall}>
+         disabled={props.disabled}>
          {props.pendingApiCall && (<div className="spinner-border text-light spinner-border-sm ml-10">
          <span className="sr-only"></span>
          </div>) 
