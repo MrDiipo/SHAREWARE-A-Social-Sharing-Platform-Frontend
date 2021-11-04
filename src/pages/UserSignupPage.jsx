@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Input from '../components/Input';
+import "./userSignUp.css"
 
 export class UserSignupPage extends Component {
         
@@ -103,7 +104,7 @@ export class UserSignupPage extends Component {
                 <div className="col-12 mb-3">
                     <Input
                     label="Username"
-                     className="form-control"
+                     className="mb-4" type="text" name="email" 
                      placeholder="Your username"
                      value= {this.state.username}
                     onChange={this.onChangeUsername}

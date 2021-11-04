@@ -8,28 +8,56 @@ export class LoginPage extends Component {
         this.state = {
                 username : undefined,
                 password: undefined,
+                apiError : 'Login Faled'
         }
     }
 
     onChangeUsername = (event)=> {
         const value = event.target.value
         this.setState({
-            username : value
+            username : value,
+            apiError : undefined,
         })
     }
 
     onChangePassword = (event)=> {
         const value = event.target.value
         this.setState({
-            password : value
+            password : value,
+            apiError : undefined,
         })
     }
 
+    onClickLogin = () => {
+        const body = {
+            username : this.state.username,
+            password : this.state.password
+        }
+        this.props.actions.postLogin(body)
+        .catch(
+            error => {
+                if(error.response){
+                    this.setState({
+                        apiError : error.response.data.message
+                    })
+                }
+            }
+        );
+    }
+
     render() {
+        let disableSubmit = false;
+        if (this.state.username === undefined){
+            disableSubmit = true;
+        }
+        if(this.state.password === undefined){
+            disableSubmit = true;
+        }
+
         return (
             <div className="container">
                 <h1 className="text-center">Login</h1>
-                <div className="col-12 mb-3">
+                <div className="mb-4" type="text" name="email">
                     <Input 
                     label="Username"
                     placeholder="Your username"
@@ -48,15 +76,32 @@ export class LoginPage extends Component {
                      />
                  </div>
 
+                 {this.state.apiError && (
+                    <div className="col-12 mb-3">
+                        <div className="alert alert-danger">{this.state.apiError}</div>
+                    </div>
+                )
+                }
+
                     <div className="text-center">
                         <button
-                            className="btn btn-primary" >
+                            disabled={disableSubmit}
+                            className="btn btn-primary"
+                            onClick={this.onClickLogin} >
                                 Login
                         </button>
                      </div>
             
             </div>
         )
+    }
+}
+
+LoginPage.defaultProps = {
+    actions : {
+        postLogin : () => new Promise((resolve, reject) => {
+            resolve({});
+        })
     }
 }
 
