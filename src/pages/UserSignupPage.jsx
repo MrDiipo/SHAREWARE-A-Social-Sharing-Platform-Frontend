@@ -153,6 +153,8 @@ UserSignupPage.defaultProps = {
         postSignup : () => new Promise((resolve, reject) =>{
             resolve({});
         })
+    }, history : {
+        push : () =>{}
     }
 }
 

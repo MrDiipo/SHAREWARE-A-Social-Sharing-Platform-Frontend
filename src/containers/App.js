@@ -5,7 +5,7 @@ import React from 'react';
 import { UserSignupPage } from './../pages/UserSignupPage';
 import { UserPage } from './../pages/UserPage';
 import * as apiCalls from './../api/apiCalls';
-
+import Topbar from '../components/Topbar';
 
 
 
@@ -18,6 +18,7 @@ const actions = {
 function App() {
   return (
     <div>
+    <Topbar/>
       <div className="container">
      <Switch>
      <Route exact path="/" component={HomePage}/>
